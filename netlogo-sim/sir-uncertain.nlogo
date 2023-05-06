@@ -40,20 +40,20 @@ to move
     right random 150
     left random 150
 
-    fd 1
+    fd 0.08
   ]
 end
 
 to recover ;; if our agent has virus, he con recover under probability and after some virus_duration but he has also a chance to die
   if virus? [
     set virus_duration virus_duration + 1
-    if random-float 1.0 < recover_probability and virus_duration > 10 [ ;; chance to recover
+    if random-float 1.0 < 0.15 and virus_duration > 17 [ ;; chance to recover
       set virus? false
       set immune true
     ]
-    if random-float 1.0 < death_probability and virus_duration > 5 [ ;; chance to die, initial 10
-        set dead true
-      ]
+    if random-float 1.0 < 0.004 and virus_duration > 12 [ ;; chance to die, initial 10
+      set dead true
+    ]
   ]
 end
 
@@ -63,9 +63,9 @@ to spread ;; Turtle-Turtle interactions (AxA)
     [
       if immune = false
       [
-        set virus? true
-        if connection [
-          ask self [create-links-from other turtles-here with [virus?]]
+        if random-float 1.0 < 0.1
+        [
+          set virus? true
         ]
       ]
     ] ;; checking if there is virus near this agent
@@ -141,36 +141,6 @@ NIL
 1
 
 SLIDER
-17
-67
-267
-100
-recover_probability
-recover_probability
-0
-1
-0.15
-0.05
-1
-NIL
-HORIZONTAL
-
-SLIDER
-16
-98
-267
-131
-death_probability
-death_probability
-0
-1
-0.2
-0.05
-1
-NIL
-HORIZONTAL
-
-SLIDER
 16
 131
 267
@@ -178,11 +148,11 @@ SLIDER
 number_turtles
 number_turtles
 0
-5000
-500.0
+10000
+10000.0
 1
 1
-NIL
+hundreds
 HORIZONTAL
 
 PLOT
@@ -204,18 +174,6 @@ PENS
 "infected" 1.0 0 -2674135 true "" "plot count turtles with [virus?]"
 "immune" 1.0 0 -4079321 true "" "plot count turtles with [immune]"
 "dead" 1.0 0 -7500403 true "" "plot count turtles with [dead]"
-"alive" 1.0 0 -15040220 true "" "plot number_turtles - count turtles with [dead]"
-
-SWITCH
-173
-35
-266
-68
-connection
-connection
-1
-1
--1000
 
 SLIDER
 16
@@ -225,24 +183,9 @@ SLIDER
 number_infected
 number_infected
 0
-1000
-22.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-16
-199
-267
-232
-infection_duration
-infection_duration
-0
 100
-50.0
-0.1
+90.0
+1
 1
 NIL
 HORIZONTAL
