@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Agent-based Modeling of a COVID-19 SIR Model</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f1deff;
+    }
+
+    /* Header/Blog Title */
+    .header {
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+      background: rgb(252, 255, 220);
+    }
+
+    /* Create two unequal columns that floats next to each other */
+    /* Left column */
+    .leftcolumn {
+      margin: auto;
+      width: 75%;
+    }
+
+    /* Add a card effect for articles */
+    .card {
+      text-align: justify;
+      text-justify: inter-word;
+      background-color: rgb(255, 240, 240);
+      padding: 20px;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 5px;
+      text-align: left;
+      background: #f5e7ff;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="header">
+      <h2>Agent-based Model Simulation of an SIR Model of COVID-19</h2>
+    </div>
+
+    <div class="row">
+      <div class="leftcolumn">
+        <div class="card">
+          <h2>Introduction</h2>
+          <p>An accurate model of the spread of COVID-19 is valuable in our proper response to the pandemic. According to the Centers for Disease Control and Prevention, “Forecasts of disease burden help inform public health decision making by projecting the likely impact of COVID-19”. As such, the CDC is constantly finding ways to better model the spread of the pandemic, in order to create a more reliable projection of the spread of the pandemic in the future. Such projections may be the difference in a well-prepared response to a wave of infections, and a disaster.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Models for Pandemic Simulation</h2>
+          <p>Two of the models used for the simulation of the spread of the pandemic are the Susceptible-Infected-Susceptible (SIS) model and the Susceptible-Infected-Recovered (SIR) model. These models are named after the assume stages of progression of the pandemic for each individual person.
+          </p>
+          <p>The SIS model assumes that re-infections may occur on the same person. Each person in the pandemic goes through two phases: Susceptible and Infected. A susceptible person may become infected after being in contact with an infected person. Then after the course of the infection, the person may be cured of the infection, which will make them susceptible again, or die from the infection, in which case they are removed from the population.
+          </p>
+          <p>In the case where there is gained immunity from the disease after recovery, a separate phase is added: Recovered. It may be assumed that a Recovered person is no longer susceptible to the disease, and thus may no longer become infected. This creates three phases for the simulation: Susceptible, Infected, and Recovered. This is the Susceptible-Infected-Removed (SIR) model.
+          </p>
+          <p>These two models are useful for diseases with different bahaviors. For example, an SIS model is more suitable for the common flu, where re-infections are common an expected. An SIR model is more suitable for COVID-19, where the chances of re-infection is assumed to be relatively low.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Methodology</h2>
+          <p>This NetLogo Agent-Based Model uses the 2020 study of Xiaowei Chen, Jing Li, Chen Xiao and Peilin Yang: "Numerical solution and parameter estimation for uncertain SIR model with application to COVID-19" as the basis of the parameters of the SIR model.
+          </p>
+          <p>The study is based on a previous SIS study of of the spread of diseases, prior to the COVID-19 pandemic. However, the COVID-19 pandemic is assumed to more closely follow an SIR model. As such, the researchers have adapted the previous study into an SIR model, in order to create a model of the new pandemic.
+          </p>
+          <p>The study assumes two phases of the sample pandemic data, with a change in 'top leader' on February 13. The change in leadership and policy has altered the dynamics of the spread of the pandemic, which included a total locdown policy of Hubei province. The parameters for the two phases, as estimated by the study, are as follows:
+          </p>
+          <p>β<sub>1</sub> = 3.9015 ∗ 10<sup>−9</sup>
+            <br>σ<sub>I1</sub> = 1.0015 ∗ 10<sup>−2</sup>
+            <br>λ<sub>1</sub> = 9.7829 ∗ 10<sup>−3</sup>
+            <br>σ<sub>R1</sub> = 1.2125 ∗ 10<sup>−3</sup>
+          </p>
+          <p>β<sub>2</sub> = −1.6777 ∗ 10<sup>−11</sup>
+            <br>σ<sub>I2</sub> = 1.0065 ∗ 10<sup>−2</sup>
+            <br>λ<sub>2</sub> = 3.9456 ∗ 10<sup>−2</sup>
+            <br>σ<sub>R2</sub> = 4.4196 ∗ 10<sup>−4</sup>
+          </p>
+          <p>The disease transmission coefficient β obtained for the second stage of the sample data is a miniscule negative number. It is unrealistic to have a negative disease transmission coefficient. Thus, we will assume that this has a value of 0, which is representative of the complete lockdown policy that has been enacted during this stage of the pandemic after replacement of the 'top leader'.
+          </p>
+          <p>The proportions used for the NetLogo Agent-based Model Simulation to the real-world example as presented in the study are as follows:
+            <br>1 day is represented as 20 ticks
+            <br>10 persons are represented as 1 "turtle".
+          </p>
+          <p>As there are additional assumptions made in translating the real-life model to the NetLogo agent-based model, the degree of interaction between the agents have to be calibrated in order to attain a curve similar to that of the original model. These parameters exclusive to the agent-based model, such as the assumed movement of the turtles, the size of the available area, and the duration of the infection, have to be tweaked to be useful as a representation of the existing model. As such, the following values have been obtained:
+            <br>
+          </p>
+          <p>Using these calibrated values, the working NetLogo Agent-Based Model is created.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Methodology</h2>
+          <p>In this section, provide some background information on COVID-19 and the SIR model. Explain why you chose
+            to use an agent-based model to simulate the spread of the disease, and outline the purpose of your paper.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Simulation Model</h2>
+          <iframe src="./netlogo.html" class="content" height="900px" width="100%"></iframe>
+        </div>
+        <div class="card">
+          <h2>Results and Discussion</h2>
+          <p>The baseline model closely correlates the spread of the pandemic as recorded in the Hubei province. However, the model may be used to predict the trend of the disease had different actions been performed. For example, the following simulation shows the spread of the disease had the lockdown not been enacted:
+          </p>
+          <p>...
+          </p>
+          <p>The following model assumes the opposite: total lockdown immediately at the start of the outbreak, in order to stifle the sperad of the disease.
+          </p>
+          <p>...
+          </p>
+          <p>This model may be used with a different baseline data. However, the parameters will have to be re-calibrated in order to be better suited for the data used in simulation.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Conclusion</h2>
+          <p>The simulation model can be used to estimate the extent of the pandemic with multiple diffusion sources via uncertain differential equations. If there is limited data, the model can still use parameters from previous literature. This model may be used to predict potential demand for ICU beds and ventilators.
+          </p>
+          <p>It should be noted, however, that while this model highlights the effectiveness of the lockdown, this does not serve as an endorsement of the severity of the lockdown in consideration of human rights and quality of life.
+          </p>
+        </div>
+        <div class="card">
+          <h2>References</h2>
+          <p>[1] Chen, X., Li, J., Xiao, C., &amp; Yang, P. (2020). Numerical solution and parameter estimation for uncertain SIR model with application to COVID-19. Fuzzy Optimization and Decision Making, 20(2), 189–208. https://doi.org/10.1007/s10700-020-09342-9
+            <br>[2] Coronavirus Disease 2019 (COVID-19). (2020, February 11). Centers for Disease Control and Prevention. https://www.cdc.gov/coronavirus/2019-ncov/science/forecasting/forecasting-math-modeling.html
+            <br>[3] How do COVID-19 symptoms progress and what causes death? (n.d.). Drugs.com. https://www.drugs.com/medical-answers/covid-19-symptoms-progress-death-3536264/
+            <br>[4] Mathieu, E. (2020, March 5). Coronavirus Pandemic (COVID-19). Our World in Data. https://ourworldindata.org/mortality-risk-covid
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <div class="footer">
+      <h6>Personal page of Kristoffer Clarete.</h6>
+    </div>
+    -->
+
+  </main>
+  <script src="index.js"></script>
+</body>
+
+</html>
