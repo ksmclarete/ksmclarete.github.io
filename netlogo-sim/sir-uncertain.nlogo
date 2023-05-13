@@ -8,11 +8,11 @@ turtles-own [;; Turtle characteristics
 to setup ;; this procedure sets up the simulation for start
   clear-all
 
-  create-turtles number_turtles [ setxy random-xcor random-ycor
+  create-turtles population [ setxy random-xcor random-ycor
     set virus? false set shape "person" set dead false set immune false set virus_duration 0]
 
 
-  create-turtles number_infected [ setxy random-xcor random-ycor
+  create-turtles initial_infected [ setxy random-xcor random-ycor
     set virus? true set shape "person" set dead false set immune false set virus_duration 0]
 
   ask turtles [recolor]
@@ -40,18 +40,18 @@ to move
     right random 150
     left random 150
 
-    fd 0.08
+    ifelse ticks > lockdown [fd lockdown_movement] [fd movement]
   ]
 end
 
 to recover ;; if our agent has virus, he con recover under probability and after some virus_duration but he has also a chance to die
   if virus? [
     set virus_duration virus_duration + 1
-    if random-float 1.0 < 0.15 and virus_duration > 17 [ ;; chance to recover
+    if random-float 1.0 < 0.07 and virus_duration > 5 [ ;; chance to recover
       set virus? false
       set immune true
     ]
-    if random-float 1.0 < 0.004 and virus_duration > 12 [ ;; chance to die, initial 10
+    if random-float 1.0 < 0.0028 and virus_duration > 10 [ ;; chance to die, initial 10
       set dead true
     ]
   ]
@@ -63,7 +63,7 @@ to spread ;; Turtle-Turtle interactions (AxA)
     [
       if immune = false
       [
-        if random-float 1.0 < 0.1
+        if random-float 1.0 < infectivity
         [
           set virus? true
         ]
@@ -80,13 +80,13 @@ to recolor ;; recolors agent based on their virus? state [red-infected, blue - n
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-268
-22
-705
-460
+363
+18
+728
+384
 -1
 -1
-13.0
+7.3
 1
 10
 1
@@ -96,10 +96,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--16
-16
--16
-16
+-24
+24
+-24
+24
 1
 1
 1
@@ -140,34 +140,19 @@ NIL
 NIL
 1
 
-SLIDER
-16
-131
-267
-164
-number_turtles
-number_turtles
-0
-10000
-10000.0
-1
-1
-hundreds
-HORIZONTAL
-
 PLOT
-14
-464
-706
-704
+18
+168
+362
+384
 plot 1
 NIL
 NIL
 0.0
-10.0
+100.0
 0.0
-10.0
-true
+4000.0
+false
 true
 "" ""
 PENS
@@ -176,15 +161,90 @@ PENS
 "dead" 1.0 0 -7500403 true "" "plot count turtles with [dead]"
 
 SLIDER
-16
-165
-267
-198
-number_infected
-number_infected
+190
+101
+362
+134
+lockdown
+lockdown
 0
 100
-90.0
+20.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+18
+134
+190
+167
+infectivity
+infectivity
+0
+1
+0.6
+0.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
+190
+68
+362
+101
+movement
+movement
+0
+1
+1.0
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+190
+134
+362
+167
+lockdown_movement
+lockdown_movement
+0
+0.2
+0.03
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+18
+68
+190
+101
+population
+population
+0
+4000
+4000.0
+100
+1
+NIL
+HORIZONTAL
+
+SLIDER
+18
+101
+190
+134
+initial_infected
+initial_infected
+0
+50
+5.0
 1
 1
 NIL

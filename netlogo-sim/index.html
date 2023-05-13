@@ -83,7 +83,7 @@
           </p>
           <p>The study is based on a previous SIS study of of the spread of diseases, prior to the COVID-19 pandemic. However, the COVID-19 pandemic is assumed to more closely follow an SIR model. As such, the researchers have adapted the previous study into an SIR model, in order to create a model of the new pandemic.
           </p>
-          <p>The study assumes two phases of the sample pandemic data, with a change in 'top leader' on February 13. The change in leadership and policy has altered the dynamics of the spread of the pandemic, which included a total locdown policy of Hubei province. The parameters for the two phases, as estimated by the study, are as follows:
+          <p>The study assumes two phases of the sample pandemic data, with a change in 'top leader' on February 13. The change in leadership and policy has altered the dynamics of the spread of the pandemic, which included a total locdown policy of Hubei province.
           </p>
           <p>β<sub>1</sub> = 3.9015 ∗ 10<sup>−9</sup>
             <br>σ<sub>I1</sub> = 1.0015 ∗ 10<sup>−2</sup>
@@ -98,19 +98,22 @@
           <p>The disease transmission coefficient β obtained for the second stage of the sample data is a miniscule negative number. It is unrealistic to have a negative disease transmission coefficient. Thus, we will assume that this has a value of 0, which is representative of the complete lockdown policy that has been enacted during this stage of the pandemic after replacement of the 'top leader'.
           </p>
           <p>The proportions used for the NetLogo Agent-based Model Simulation to the real-world example as presented in the study are as follows:
-            <br>1 day is represented as 20 ticks
-            <br>10 persons are represented as 1 "turtle".
+            <br>1 day is represented as 1 tick.
+            <br>200 persons are represented as 1 "turtle".
           </p>
-          <p>As there are additional assumptions made in translating the real-life model to the NetLogo agent-based model, the degree of interaction between the agents have to be calibrated in order to attain a curve similar to that of the original model. These parameters exclusive to the agent-based model, such as the assumed movement of the turtles, the size of the available area, and the duration of the infection, have to be tweaked to be useful as a representation of the existing model. As such, the following values have been obtained:
-            <br>
+          <p>As there are additional assumptions made in translating the real-life model to the NetLogo agent-based model, the degree of interaction between the agents have to be calibrated in order to attain a curve similar to that of the original model. These parameters exclusive to the agent-based model, such as the assumed movement of the turtles, the size of the available area, and the duration of the infection, have to be tweaked to be useful as a representation of the existing model. Based on the study of drugs.com [3], the average time for deaht from the pandemic is 18.5 days, and the average time for recovery is 22 days. Additionally, according to the study of Mathieu, E. (2020), the death rate for COVID-19 in Wuhan, China near the start of the pandemic is around 4-5%. Based on these values, the following values are used as estmates for the turtle-specific values of death and recovery:
           </p>
-          <p>Using these calibrated values, the working NetLogo Agent-Based Model is created.
+          <img src="./old_model.png"></img>
+          <p>The movement-related turtle values for the agents are then calibrated to create a model similar to the SIR graph as presented in the study basis. Notably, the study involves a lockdown around day 20, so this model incorporates two movement values: one pre-lockdown and one post-lockdown. This is the infected/removed graph from the study: 
           </p>
-        </div>
-        <div class="card">
-          <h2>Methodology</h2>
-          <p>In this section, provide some background information on COVID-19 and the SIR model. Explain why you chose
-            to use an agent-based model to simulate the spread of the disease, and outline the purpose of your paper.
+          <img src="./study-graph.png"></img>
+          <p>Attempting to create the graph with the NetLogo model yields the following model at best:
+          </p>
+          <img src="./old-duration-model.png"></img>
+          <p>Notably, the curve is too smooth compared to the graph. This might indicate that the duration of the infections on the turtles is too consistent. Thus, the infection-related variables are changed in an attempt to add more variance to the infection duration:
+          </p>
+          <img src="./new_model.png"></img>
+          <p>And repeating the movement calibration process, the model is finalized.
           </p>
         </div>
         <div class="card">
@@ -121,11 +124,14 @@
           <h2>Results and Discussion</h2>
           <p>The baseline model closely correlates the spread of the pandemic as recorded in the Hubei province. However, the model may be used to predict the trend of the disease had different actions been performed. For example, the following simulation shows the spread of the disease had the lockdown not been enacted:
           </p>
-          <p>...
+          <img src="./nlockdown-model.png"></img>
+          <p>Notably, the peak of the pandemic has considerably more infected people.
           </p>
           <p>The following model assumes the opposite: total lockdown immediately at the start of the outbreak, in order to stifle the sperad of the disease.
           </p>
-          <p>...
+          <img src="./lockdown-model.png"></img>
+          <p>
+            The lockdown significantly stifles the spread of the disease, to the point that it barely spreads to people.
           </p>
           <p>This model may be used with a different baseline data. However, the parameters will have to be re-calibrated in order to be better suited for the data used in simulation.
           </p>
